@@ -22,6 +22,8 @@ clock="\xE2\x8F\xB0 "
 sparkles="\xE2\x9C\xA8 "
 stop_sign="\xF0\x9F\x9B\x91"
 warning_sign="\xE2\x9A\xA0\xEF\xB8\x8F"
+key="\xF0\x9F\x94\x91"
+circle_arrows="\xF0\x9F\x94\x84"
 
 
 # Set venv with iSor and Black binaries here
@@ -39,7 +41,7 @@ pwd
 echo
 
 echo -e "${bold_green}${sparkles} Running iSort...${end}"
-isort="N"
+isort="Y"
 if  [[ $isort == "Y" ]]; then
     isort . 2>&1
 else
@@ -48,7 +50,7 @@ fi
 echo
 
 echo -e "${bold_green}${sparkles} Running Black...${end}"
-black="N"
+black="Y"
 if  [[ $black == "Y" ]]; then
     black . 2>&1
 else
@@ -57,7 +59,7 @@ fi
 echo
 
 echo -e "${bold_green}${sparkles} Running Flake8...${end}"
-flake8="N"
+flake8="Y"
 if  [[ $flake8 == "Y" ]]; then
     flake8 -v . 2>&1
 else
@@ -66,7 +68,7 @@ fi
 echo
 
 echo -e "${bold_green}${sparkles} Running mypy...${end}"
-mypy="N"
+mypy="Y"
 if  [[ $mypy == "Y" ]]; then
     mypy ./src 2>&1
 else
