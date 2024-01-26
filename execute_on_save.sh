@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Command used in the external tool is:
 # --login -c "./execute_on_save.sh"
