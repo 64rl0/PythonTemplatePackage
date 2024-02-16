@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Command used in the external tool is:
-# --login -c "./execute_on_save.sh"
+# --login -c "./scripts/execute_on_save.sh"
 
 # Colors
 red=$'\033[31m'
