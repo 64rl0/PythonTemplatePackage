@@ -36,11 +36,6 @@ circle_arrows="\xF0\x9F\x94\x84"
 broom="\xF0\x9F\xA7\xB9"
 link="\xF0\x9F\x94\x97"
 
-# Exit immediately if a command exits with a non-zero status
-set -o errexit
-# The exit status of a pipeline is the status of the last command to exit with a non-zero status
-set -o pipefail
-
 # Paths
 script_fullpath="$0"
 script_dir="$(dirname "${script_fullpath}")"
