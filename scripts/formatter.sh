@@ -1,7 +1,16 @@
 #!/bin/bash
 
+#   __|    \    _ \  |      _ \   __| __ __| __ __|
+#  (      _ \     /  |     (   | (_ |    |      |
+# \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
+
+# formatter.sh
+# Created 2/16/24 - 9:20 AM UK Time (London) by carlogtt
+# Copyright (c) Amazon.com Inc. All Rights Reserved.
+# AMAZON.COM CONFIDENTIAL
+
 # Command used in the external tool is:
-# --login -c "./scripts/execute_on_save.sh"
+# --login -c "./scripts/formatter.sh"
 
 # Colors
 red=$'\033[31m'
@@ -16,14 +25,21 @@ bold=$'\033[1m'
 end=$'\033[0m'
 
 # Emoji
-green_check_mark="\xE2\x9C\x85 "
+green_check_mark="\xE2\x9C\x85"
 hammer_and_wrench="\xF0\x9F\x9B\xA0"
-clock="\xE2\x8F\xB0 "
-sparkles="\xE2\x9C\xA8 "
+clock="\xE2\x8F\xB0"
+sparkles="\xE2\x9C\xA8"
 stop_sign="\xF0\x9F\x9B\x91"
 warning_sign="\xE2\x9A\xA0\xEF\xB8\x8F"
 key="\xF0\x9F\x94\x91"
 circle_arrows="\xF0\x9F\x94\x84"
+broom="\xF0\x9F\xA7\xB9"
+link="\xF0\x9F\x94\x97"
+
+# Exit immediately if a command exits with a non-zero status
+set -o errexit
+# The exit status of a pipeline is the status of the last command to exit with a non-zero status
+set -o pipefail
 
 # Paths
 script_fullpath="$0"
@@ -31,10 +47,15 @@ script_dir="$(dirname "${script_fullpath}")"
 script_dir_absolute_path="$(realpath "${script_dir}")"
 project_root_dir="$(realpath "${script_dir_absolute_path}/..")"
 
-# Set venv with iSor and Black binaries here
+# Check if we are on DevDsk or local Dev Env
 devdsk=5
-path_to_venv_root="${HOME}/devdsk${devdsk}/venvs/dev_tools"
-path_to_venv_root="${HOME}/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools"
+if [ -d "${HOME}/devdsk${devdsk}" ]; then
+    # Use DevDsk venv
+    path_to_venv_root="${HOME}/devdsk${devdsk}/venvs/dev_tools"
+else
+    # Use local dev venv
+    path_to_venv_root="${HOME}/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools"
+fi
 source "${path_to_venv_root}/bin/activate"
 echo
 
