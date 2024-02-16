@@ -25,25 +25,34 @@ warning_sign="\xE2\x9A\xA0\xEF\xB8\x8F"
 key="\xF0\x9F\x94\x91"
 circle_arrows="\xF0\x9F\x94\x84"
 
+# Paths
+script_fullpath="$0"
+script_dir="$(dirname "${script_fullpath}")"
+script_dir_absolute_path="$(realpath "${script_dir}")"
+project_root_dir="$(realpath "${script_dir_absolute_path}/..")"
 
 # Set venv with iSor and Black binaries here
-path_to_venv_root='/Users/carlogtt/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools'
-source ${path_to_venv_root}/bin/activate
+devdsk=5
+path_to_venv_root="${HOME}/devdsk${devdsk}/venvs/dev_tools"
+path_to_venv_root="${HOME}/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools"
+source "${path_to_venv_root}/bin/activate"
 echo
 
 echo -e "${bold_green}${green_check_mark} Virtual environment activated:${end}"
-echo "venv: $VIRTUAL_ENV"
-echo "running: $(python --version)"
+echo -e "OS Version: $(uname)"
+echo -e "Kernel Version: $(uname -r)"
+echo -e "venv: $VIRTUAL_ENV"
+echo -e "running: $(python --version)"
 echo
 
 echo -e "${bold_green}${hammer_and_wrench} Project Root:${end}"
-pwd
+echo "${project_root_dir}"
 echo
 
 echo -e "${bold_green}${sparkles} Running iSort...${end}"
 isort="Y"
 if  [[ $isort == "Y" ]]; then
-    isort . 2>&1
+    isort "${project_root_dir}/src" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -52,7 +61,7 @@ echo
 echo -e "${bold_green}${sparkles} Running Black...${end}"
 black="Y"
 if  [[ $black == "Y" ]]; then
-    black . 2>&1
+    black "${project_root_dir}/src" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -61,7 +70,7 @@ echo
 echo -e "${bold_green}${sparkles} Running Flake8...${end}"
 flake8="Y"
 if  [[ $flake8 == "Y" ]]; then
-    flake8 -v . 2>&1
+    flake8 -v "${project_root_dir}/src" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -70,7 +79,7 @@ echo
 echo -e "${bold_green}${sparkles} Running mypy...${end}"
 mypy="Y"
 if  [[ $mypy == "Y" ]]; then
-    mypy ./src 2>&1
+    mypy "${project_root_dir}/src" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
