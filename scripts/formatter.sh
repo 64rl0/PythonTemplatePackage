@@ -4,8 +4,8 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# formatter.sh
-# Created 2/16/24 - 9:20 AM UK Time (London) by carlogtt
+# scripts/formatter.sh
+# Created 2/16/24 - 1:26 PM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
 
@@ -67,7 +67,7 @@ echo
 
 echo -e "${bold_green}${sparkles} Running iSort...${end}"
 isort="Y"
-if  [[ $isort == "Y" ]]; then
+if [ $isort == "Y" ]; then
     isort "${project_root_dir}/src" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
@@ -76,7 +76,7 @@ echo
 
 echo -e "${bold_green}${sparkles} Running Black...${end}"
 black="Y"
-if  [[ $black == "Y" ]]; then
+if [ $black == "Y" ]; then
     black "${project_root_dir}/src" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
@@ -85,7 +85,7 @@ echo
 
 echo -e "${bold_green}${sparkles} Running Flake8...${end}"
 flake8="Y"
-if  [[ $flake8 == "Y" ]]; then
+if [ $flake8 == "Y" ]; then
     flake8 -v "${project_root_dir}/src" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
@@ -94,8 +94,17 @@ echo
 
 echo -e "${bold_green}${sparkles} Running mypy...${end}"
 mypy="Y"
-if  [[ $mypy == "Y" ]]; then
+if [ $mypy == "Y" ]; then
     mypy "${project_root_dir}/src" 2>&1
+else
+    echo -e "${bold_red}[DISABLED]${end}"
+fi
+echo
+
+echo -e "${bold_green}${sparkles} Running shfmt...${end}"
+shfmt="Y"
+if [ $mypy == "Y" ]; then
+    shfmt -l -w "${script_dir_absolute_path}"
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
