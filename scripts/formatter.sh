@@ -68,7 +68,10 @@ echo
 echo -e "${bold_green}${sparkles} Running iSort...${end}"
 isort="Y"
 if [ $isort == "Y" ]; then
+    echo -e "${bold_blu}src/${end}"
     isort "${project_root_dir}/src" 2>&1
+    echo -e "${bold_blu}\ntest/${end}"
+    isort "${project_root_dir}/test" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -77,7 +80,10 @@ echo
 echo -e "${bold_green}${sparkles} Running Black...${end}"
 black="Y"
 if [ $black == "Y" ]; then
+    echo -e "${bold_blu}src/${end}"
     black "${project_root_dir}/src" 2>&1
+    echo -e "${bold_blu}\ntest/${end}"
+    black "${project_root_dir}/test" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -86,7 +92,10 @@ echo
 echo -e "${bold_green}${sparkles} Running Flake8...${end}"
 flake8="Y"
 if [ $flake8 == "Y" ]; then
+    echo -e "${bold_blu}src/${end}"
     flake8 -v "${project_root_dir}/src" 2>&1
+    echo -e "${bold_blu}\ntest/${end}"
+    flake8 -v "${project_root_dir}/test" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -95,7 +104,10 @@ echo
 echo -e "${bold_green}${sparkles} Running mypy...${end}"
 mypy="Y"
 if [ $mypy == "Y" ]; then
+    echo -e "${bold_blu}src/${end}"
     mypy "${project_root_dir}/src" 2>&1
+    echo -e "${bold_blu}\ntest/${end}"
+    mypy "${project_root_dir}/test" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -105,6 +117,8 @@ echo -e "${bold_green}${sparkles} Running shfmt...${end}"
 shfmt="Y"
 if [ $mypy == "Y" ]; then
     shfmt -l -w "${script_dir_absolute_path}"
+    shfmt -l -w "${project_root_dir}/src"
+    shfmt -l -w "${project_root_dir}/test"
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
