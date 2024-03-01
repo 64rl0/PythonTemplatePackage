@@ -36,11 +36,11 @@ circle_arrows="\xF0\x9F\x94\x84"
 broom="\xF0\x9F\xA7\xB9"
 link="\xF0\x9F\x94\x97"
 
-# Paths
-script_fullpath="$0"
-script_dir="$(dirname "${script_fullpath}")"
-script_dir_absolute_path="$(realpath "${script_dir}")"
-project_root_dir="$(realpath "${script_dir_absolute_path}/..")"
+# Script Paths
+declare -r script_dir_abs
+script_dir_abs="$(realpath -- "$(dirname -- "${BASH_SOURCE[0]}")")"
+declare -r project_root_dir_abs
+project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
 
 # Check if we are on DevDsk or local Dev Env
 devdsk=5
@@ -62,16 +62,16 @@ echo -e "running: $(python --version)"
 echo
 
 echo -e "${bold_green}${hammer_and_wrench} Project Root:${end}"
-echo "${project_root_dir}"
+echo "${project_root_dir_abs}"
 echo
 
 echo -e "${bold_green}${sparkles} Running iSort...${end}"
 isort="Y"
 if [ $isort == "Y" ]; then
     echo -e "${bold_blu}src/${end}"
-    isort "${project_root_dir}/src" 2>&1
+    isort "${project_root_dir_abs}/src" 2>&1
     echo -e "${bold_blu}\ntest/${end}"
-    isort "${project_root_dir}/test" 2>&1
+    isort "${project_root_dir_abs}/test" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -81,9 +81,9 @@ echo -e "${bold_green}${sparkles} Running Black...${end}"
 black="Y"
 if [ $black == "Y" ]; then
     echo -e "${bold_blu}src/${end}"
-    black "${project_root_dir}/src" 2>&1
+    black "${project_root_dir_abs}/src" 2>&1
     echo -e "${bold_blu}\ntest/${end}"
-    black "${project_root_dir}/test" 2>&1
+    black "${project_root_dir_abs}/test" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -93,9 +93,9 @@ echo -e "${bold_green}${sparkles} Running Flake8...${end}"
 flake8="Y"
 if [ $flake8 == "Y" ]; then
     echo -e "${bold_blu}src/${end}"
-    flake8 -v "${project_root_dir}/src" 2>&1
+    flake8 -v "${project_root_dir_abs}/src" 2>&1
     echo -e "${bold_blu}\ntest/${end}"
-    flake8 -v "${project_root_dir}/test" 2>&1
+    flake8 -v "${project_root_dir_abs}/test" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -105,9 +105,9 @@ echo -e "${bold_green}${sparkles} Running mypy...${end}"
 mypy="Y"
 if [ $mypy == "Y" ]; then
     echo -e "${bold_blu}src/${end}"
-    mypy "${project_root_dir}/src" 2>&1
+    mypy "${project_root_dir_abs}/src" 2>&1
     echo -e "${bold_blu}\ntest/${end}"
-    mypy "${project_root_dir}/test" 2>&1
+    mypy "${project_root_dir_abs}/test" 2>&1
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -116,9 +116,9 @@ echo
 echo -e "${bold_green}${sparkles} Running shfmt...${end}"
 shfmt="Y"
 if [ $mypy == "Y" ]; then
-    shfmt -l -w "${script_dir_absolute_path}"
-    shfmt -l -w "${project_root_dir}/src"
-    shfmt -l -w "${project_root_dir}/test"
+    shfmt -l -w "${script_dir_abs}"
+    shfmt -l -w "${project_root_dir_abs}/src"
+    shfmt -l -w "${project_root_dir_abs}/test"
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
