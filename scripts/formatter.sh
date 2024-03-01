@@ -59,7 +59,7 @@ declare -r italic=$'\033[3m' # Not widely supported
 declare -r underline=$'\033[4m'
 declare -r blink=$'\033[5m' # Not widely supported, use sparingly
 declare -r invert=$'\033[7m'
-declare -r hidden=$'\033[8m'        # Hide text (useful for passwords)
+declare -r hidden=$'\033[8m' # Hide text (useful for passwords)
 declare -r strikethrough=$'\033[9m' # Not widely supported
 
 # Reset Specific Formatting
