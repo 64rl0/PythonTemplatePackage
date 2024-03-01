@@ -37,10 +37,10 @@ broom="\xF0\x9F\xA7\xB9"
 link="\xF0\x9F\x94\x97"
 
 # Script Paths
-declare -r script_dir_abs
 script_dir_abs="$(realpath -- "$(dirname -- "${BASH_SOURCE[0]}")")"
-declare -r project_root_dir_abs
+declare -r script_dir_abs
 project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
+declare -r project_root_dir_abs
 
 # Check if we are on DevDsk or local Dev Env
 devdsk=5
