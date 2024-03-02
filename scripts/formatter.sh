@@ -42,35 +42,21 @@ declare -r bg_magenta=$'\033[45m'
 declare -r bg_cyan=$'\033[46m'
 declare -r bg_white=$'\033[47m'
 
-# Bold/Bright Background Colors
-declare -r bg_bold_black=$'\033[100m'
-declare -r bg_bold_red=$'\033[101m'
-declare -r bg_bold_green=$'\033[102m'
-declare -r bg_bold_yellow=$'\033[103m'
-declare -r bg_bold_blue=$'\033[104m'
-declare -r bg_bold_magenta=$'\033[105m'
-declare -r bg_bold_cyan=$'\033[106m'
-declare -r bg_bold_white=$'\033[107m'
-
 # Text Formatting
 declare -r bold=$'\033[1m'
 declare -r dim=$'\033[2m'
-declare -r italic=$'\033[3m' # Not widely supported
+declare -r italic=$'\033[3m'
 declare -r underline=$'\033[4m'
-declare -r blink=$'\033[5m' # Not widely supported, use sparingly
 declare -r invert=$'\033[7m'
-declare -r hidden=$'\033[8m' # Hide text (useful for passwords)
-declare -r strikethrough=$'\033[9m' # Not widely supported
+declare -r hidden=$'\033[8m'
 
 # Reset Specific Formatting
-declare -r end=$'\033[0m' # Reset all colors and text formatting
-declare -r reset_bold=$'\033[21m'
-declare -r reset_dim=$'\033[22m'
-declare -r reset_italic_underline=$'\033[23m' # Resets both italic and underline
-declare -r reset_blink=$'\033[25m'
-declare -r reset_invert=$'\033[27m'
-declare -r reset_hidden=$'\033[28m'
-declare -r reset_strikethrough=$'\033[29m'
+declare -r end=$'\033[0m'
+declare -r end_bold=$'\033[21m'
+declare -r end_dim=$'\033[22m'
+declare -r end_italic_underline=$'\033[23m'
+declare -r end_invert=$'\033[27m'
+declare -r end_hidden=$'\033[28m'
 
 # Emoji
 declare -r green_check_mark="\xE2\x9C\x85"
