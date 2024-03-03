@@ -84,12 +84,15 @@ declare -r project_root_dir_abs
 
 # Check if we are on DevDsk or local Dev Env
 devdsk=5
-if [ -d "${HOME}/devdsk${devdsk}" ]; then
+if [[ -d "${HOME}/devdsk${devdsk}" ]]; then
     # Use DevDsk venv
     path_to_venv_root="${HOME}/devdsk${devdsk}/venvs/dev_tools"
-else
+elif [[ -d "${HOME}/Library/CloudStorage/Dropbox" ]]; then
     # Use local dev venv
     path_to_venv_root="${HOME}/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools"
+else
+    echo -e "\n${bold_red}Have you selected the correct DevDsk in the formatter file?${end}\n"
+    exit 1
 fi
 source "${path_to_venv_root}/bin/activate"
 echo
@@ -107,7 +110,7 @@ echo
 
 echo -e "${bold_green}${sparkles} Running iSort...${end}"
 isort="Y"
-if [ $isort == "Y" ]; then
+if [[ $isort == "Y" ]]; then
     echo -e "${bold_blue}src/${end}"
     isort "${project_root_dir_abs}/src" 2>&1
     echo -e "${bold_blue}\ntest/${end}"
@@ -119,7 +122,7 @@ echo
 
 echo -e "${bold_green}${sparkles} Running Black...${end}"
 black_fmt="Y"
-if [ $black_fmt == "Y" ]; then
+if [[ $black_fmt == "Y" ]]; then
     echo -e "${bold_blue}src/${end}"
     black "${project_root_dir_abs}/src" 2>&1
     echo -e "${bold_blue}\ntest/${end}"
@@ -131,7 +134,7 @@ echo
 
 echo -e "${bold_green}${sparkles} Running Flake8...${end}"
 flake8="Y"
-if [ $flake8 == "Y" ]; then
+if [[ $flake8 == "Y" ]]; then
     echo -e "${bold_blue}src/${end}"
     flake8 -v "${project_root_dir_abs}/src" 2>&1
     echo -e "${bold_blue}\ntest/${end}"
@@ -143,7 +146,7 @@ echo
 
 echo -e "${bold_green}${sparkles} Running mypy...${end}"
 mypy="Y"
-if [ $mypy == "Y" ]; then
+if [[ $mypy == "Y" ]]; then
     echo -e "${bold_blue}src/${end}"
     mypy "${project_root_dir_abs}/src" 2>&1
     echo -e "${bold_blue}\ntest/${end}"
@@ -155,7 +158,7 @@ echo
 
 echo -e "${bold_green}${sparkles} Running shfmt...${end}"
 shfmt="Y"
-if [ $mypy == "Y" ]; then
+if [[ $mypy == "Y" ]]; then
     shfmt -l -w "${script_dir_abs}"
     shfmt -l -w "${project_root_dir_abs}/src"
     shfmt -l -w "${project_root_dir_abs}/test"

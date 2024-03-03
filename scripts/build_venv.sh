@@ -79,10 +79,10 @@ declare -r script_dir_abs
 project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
 declare -r project_root_dir_abs
 
-if [ -z "$1" ]; then
+if [[ -z "$1" ]]; then
     venv_name="build_undefined"
     echo -e "\n\n${bold_red}${warning_sign} No venv name supplied! Using: ${venv_name}${end}"
-elif [ -n "$1" ]; then
+elif [[ -n "$1" ]]; then
     venv_name="$1"
     echo -e "\n\n${bold_green}${green_check_mark} Building venv ${venv_name}${end}"
 fi
