@@ -99,7 +99,7 @@ elif [[ -d "${HOME}/Library/CloudStorage/Dropbox" ]]; then
 else
     echo -e "\n${bold_red}Cannot find any venv to activate!${end}"
     echo -e "${bold_red}Have you selected the correct DevDsk and/or build_venv in the formatter file?${end}"
-    echo -e "${bold_red}Run make build to build a local build_venv in ${project_root_dir_abs}/build_venv${end}\n"
+    echo -e "${bold_red}Run 'make build' to build a local build_venv in ${project_root_dir_abs}/build_venv${end}\n"
     exit 1
 fi
 source "${path_to_venv_root}/bin/activate"
