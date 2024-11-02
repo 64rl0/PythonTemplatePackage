@@ -85,16 +85,21 @@ declare -r project_root_dir_abs
 echo -e "\n${bold_green}${hammer_and_wrench} Project Root:${end}"
 echo "${project_root_dir_abs}"
 
-# Check if we are on DevDsk or local Dev Env
+# Select the correct venv with the tools installed
 devdsk=6
-if [[ -d "${HOME}/devdsk${devdsk}" ]]; then
-    # Use DevDsk venv
+if [[ -d "${project_root_dir_abs}/build_venv" ]]; then
+    # Use embedded build_venv venv before anything else
+    path_to_venv_root="${project_root_dir_abs}/build_venv"
+elif [[ -d "${HOME}/devdsk${devdsk}" ]]; then
+    # Use DevDsk venv if we are on a DevDsk
     path_to_venv_root="${HOME}/devdsk${devdsk}/venvs/dev_tools"
 elif [[ -d "${HOME}/Library/CloudStorage/Dropbox" ]]; then
-    # Use local dev venv
+    # Use dev_tools venv if we are on local macbook
     path_to_venv_root="${HOME}/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools"
 else
-    echo -e "\n${bold_red}Have you selected the correct DevDsk in the formatter file?${end}\n"
+    echo -e "\n${bold_red}Cannot find any venv to activate!${end}"
+    echo -e "${bold_red}Have you selected the correct DevDsk and/or build_venv in the formatter file?${end}"
+    echo -e "${bold_red}Run make build to build a local build_venv in ${project_root_dir_abs}/build_venv${end}\n"
     exit 1
 fi
 source "${path_to_venv_root}/bin/activate"
