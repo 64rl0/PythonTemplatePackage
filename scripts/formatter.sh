@@ -86,7 +86,7 @@ echo -e "\n${bold_green}${hammer_and_wrench} Project Root:${end}"
 echo "${project_root_dir_abs}"
 
 # Select the correct venv with the tools installed
-devdsk=6
+devdsk=7
 if [[ -d "${project_root_dir_abs}/build_venv" ]]; then
     # Use embedded build_venv venv before anything else
     path_to_venv_root="${project_root_dir_abs}/build_venv"
