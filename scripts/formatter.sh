@@ -102,7 +102,7 @@ elif [[ -d "${HOME}/Library/CloudStorage/Dropbox" ]]; then
 	path_to_venv_root="${HOME}/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools"
 fi
 
-# Activate venv if we are not in brazil venv
+# Display Project info
 echo -e "\n${bold_green}${hammer_and_wrench} Project Root:${end}"
 echo "${project_root_dir_abs}"
 
@@ -116,17 +116,19 @@ if [[ -n "${brazil_bin_dir}" ]]; then
 elif [[ -n "${path_to_venv_root}" ]]; then
 	source "${path_to_venv_root}/bin/activate"
 	echo -e "\n${bold_green}${green_check_mark} Virtual environment activated:${end}"
-	echo -e "OS Version: $(uname)"
-	echo -e "Kernel Version: $(uname -r)"
 	echo -e "venv: ${VIRTUAL_ENV}"
-	echo -e "running: $(python --version)"
-#  Cannot find any venv to activate
+#  Cannot activate any venv
 else
 	echo -e "\n${bold_red}Cannot find any venv to activate!${end}"
 	echo -e "${bold_red}Have you selected the correct DevDsk and/or build_venv in the formatter file?${end}"
 	echo -e "${bold_red}Run 'make build' to build a local build_venv in ${project_root_dir_abs}/build_venv${end}\n"
 	exit 1
 fi
+
+# Display env info
+echo -e "OS Version: $(uname)"
+echo -e "Kernel Version: $(uname -r)"
+echo -e "running: $(python --version)"
 
 echo -e "\n${bold_green}${sparkles} Running iSort...${end}"
 isort="Y"
