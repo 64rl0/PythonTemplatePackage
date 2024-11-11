@@ -128,7 +128,7 @@ fi
 # Display env info
 echo -e "OS Version: $(uname)"
 echo -e "Kernel Version: $(uname -r)"
-echo -e "running: $(python --version)"
+echo -e "running: $(python3 --version)"
 
 echo -e "\n${bold_green}${sparkles} Running iSort...${end}"
 isort="Y"
