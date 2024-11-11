@@ -90,7 +90,7 @@ fi
 
 # Create Local venv
 echo -e "\n\n${bold_green}${sparkles} Creating ${venv_name} venv...${end}"
-python_version_for_venv="3.11"
+python_version_for_venv="3.12"
 python${python_version_for_venv} -m venv --clear --copies "${project_root_dir_abs}/${venv_name}"
 
 # Activate local venv
