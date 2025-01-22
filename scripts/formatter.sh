@@ -4,7 +4,7 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# ProjectNameHere/scripts/formatter.sh
+# scripts/formatter.sh
 # Created 3/3/24 - 11:41 AM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
