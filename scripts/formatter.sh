@@ -217,6 +217,43 @@ else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
 
+echo -e "\n${bold_green}${sparkles} Running 'NNBSP' char replacement...${end}"
+nnbsp="Y"
+if [[ "${nnbsp}" == "Y" ]]; then
+    if [[ -d "${script_dir_abs}" ]]; then
+        echo -e "${blue}scripts/${end}"
+        find "${project_root_dir_abs}/scripts" -type f -not -name "formatter.sh" -exec sed -i '' 's/ / /g' {} +
+        echo -e "done!"
+    fi
+    if [[ -d "${project_root_dir_abs}/cli_scripts" ]]; then
+        echo -e "${blue}\ncli_scripts/${end}"
+        find "${project_root_dir_abs}/cli_scripts" -type f -exec sed -i '' 's/ / /g' {} +
+        echo -e "done!"
+    fi
+    if [[ -d "${project_root_dir_abs}/configuration" ]]; then
+        echo -e "${blue}\nconfiguration/${end}"
+        find "${project_root_dir_abs}/configuration" -type f -exec sed -i '' 's/ / /g' {} +
+        echo -e "done!"
+    fi
+    if [[ -d "${project_root_dir_abs}/src" ]]; then
+        echo -e "${blue}\nsrc/${end}"
+        find "${project_root_dir_abs}/src" -type f -not -path '*.pyc' -exec sed -i '' 's/ / /g' {} +
+        echo -e "done!"
+    fi
+    if [[ -d "${project_root_dir_abs}/test" ]]; then
+        echo -e "${blue}\ntest/${end}"
+        find "${project_root_dir_abs}/test" -type f -not -path '*.pyc' -exec sed -i '' 's/ / /g' {} +
+        echo -e "done!"
+    fi
+    if [[ -d "${project_root_dir_abs}/lib" ]]; then
+        echo -e "${blue}\nlib/${end}"
+        find "${project_root_dir_abs}/lib" -type f -exec sed -i '' 's/ / /g' {} +
+        echo -e "done!"
+    fi
+else
+    echo -e "${bold_red}[DISABLED]${end}"
+fi
+
 echo -e "\n${bold_yellow}${warning_sign} Virtual environment deactivated!${end}"
 if [[ -n "${OLD_PATH}" ]]; then
 	PATH="${OLD_PATH}"
