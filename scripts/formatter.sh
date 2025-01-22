@@ -225,11 +225,6 @@ if [[ "${nnbsp}" == "Y" ]]; then
         find "${project_root_dir_abs}/scripts" -type f -not -name "formatter.sh" -exec sed -i '' 's/ / /g' {} +
         echo -e "done!"
     fi
-    if [[ -d "${project_root_dir_abs}/cli_scripts" ]]; then
-        echo -e "${blue}\ncli_scripts/${end}"
-        find "${project_root_dir_abs}/cli_scripts" -type f -exec sed -i '' 's/ / /g' {} +
-        echo -e "done!"
-    fi
     if [[ -d "${project_root_dir_abs}/configuration" ]]; then
         echo -e "${blue}\nconfiguration/${end}"
         find "${project_root_dir_abs}/configuration" -type f -exec sed -i '' 's/ / /g' {} +
