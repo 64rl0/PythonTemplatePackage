@@ -88,18 +88,18 @@ python_runtime="python3.11"
 
 # Use brazil runtime farm
 if [[ -d "${project_root_dir_abs}/build/private" ]]; then
-	brazil_bin_dir="$(brazil-path testrun.runtimefarm)/${python_runtime}/bin"
+    brazil_bin_dir="$(brazil-path testrun.runtimefarm)/${python_runtime}/bin"
 fi
 
 # Use project build_venv venv
 if [[ -d "${project_root_dir_abs}/build_venv" ]]; then
-	path_to_venv_root="${project_root_dir_abs}/build_venv"
+    path_to_venv_root="${project_root_dir_abs}/build_venv"
 # Use DevDsk dev_tools venv if we are on a DevDsk
 elif [[ -d "${HOME}/${devdsk}" ]]; then
-	path_to_venv_root="${HOME}/${devdsk}/venvs/dev_tools"
+    path_to_venv_root="${HOME}/${devdsk}/venvs/dev_tools"
 # Use Dropbox dev_tools venv if we are on local macbook
 elif [[ -d "${HOME}/Library/CloudStorage/Dropbox" ]]; then
-	path_to_venv_root="${HOME}/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools"
+    path_to_venv_root="${HOME}/Library/CloudStorage/Dropbox/SDE/VirtualEnvs/dev_tools"
 fi
 
 # Display Project info
@@ -108,21 +108,21 @@ echo "${project_root_dir_abs}"
 
 # Activate brazil runtime env first as it takes precedence
 if [[ -n "${brazil_bin_dir}" ]]; then
-	OLD_PATH="${PATH}"
-	PATH="${brazil_bin_dir}:${PATH}"
-	echo -e "\n${bold_green}${green_check_mark} Virtual environment activated:${end}"
-	echo -e "${brazil_bin_dir}"
+    OLD_PATH="${PATH}"
+    PATH="${brazil_bin_dir}:${PATH}"
+    echo -e "\n${bold_green}${green_check_mark} Virtual environment activated:${end}"
+    echo -e "${brazil_bin_dir}"
 # Activate venv if we are not in brazil venv
 elif [[ -n "${path_to_venv_root}" ]]; then
-	source "${path_to_venv_root}/bin/activate"
-	echo -e "\n${bold_green}${green_check_mark} Virtual environment activated:${end}"
-	echo -e "venv: ${VIRTUAL_ENV}"
+    source "${path_to_venv_root}/bin/activate"
+    echo -e "\n${bold_green}${green_check_mark} Virtual environment activated:${end}"
+    echo -e "venv: ${VIRTUAL_ENV}"
 #  Cannot activate any venv
 else
-	echo -e "\n${bold_red}Cannot find any venv to activate!${end}"
-	echo -e "${bold_red}Have you selected the correct DevDsk and/or build_venv in the formatter file?${end}"
-	echo -e "${bold_red}Run 'make build' to build a local build_venv in ${project_root_dir_abs}/build_venv${end}\n"
-	exit 1
+    echo -e "\n${bold_red}Cannot find any venv to activate!${end}"
+    echo -e "${bold_red}Have you selected the correct DevDsk and/or build_venv in the formatter file?${end}"
+    echo -e "${bold_red}Run 'make build' to build a local build_venv in ${project_root_dir_abs}/build_venv${end}\n"
+    exit 1
 fi
 
 # Display env info
@@ -251,7 +251,7 @@ fi
 
 echo -e "\n${bold_yellow}${warning_sign} Virtual environment deactivated!${end}"
 if [[ -n "${OLD_PATH}" ]]; then
-	PATH="${OLD_PATH}"
+    PATH="${OLD_PATH}"
 else
-	deactivate
+    deactivate
 fi
