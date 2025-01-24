@@ -1,8 +1,10 @@
-# Custom built packages
-# my-utils-library
+# My Library
+carlogtt-python-library
 
-# Project utils dependencies
+# Runtime dependencies
 python-dotenv
+
+# Development dependencies
 black
 isort
 mypy
