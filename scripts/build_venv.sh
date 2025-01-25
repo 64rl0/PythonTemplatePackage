@@ -104,8 +104,7 @@ echo -e "running: $(python --version)"
 # Install requirements
 echo -e "\n\n${bold_green}${sparkles} Installing requirements...${end}"
 pip install --upgrade pip
-pip install "/Users/carlogtt/Dropbox/SDE/Python/CarloCodes/my_utils_library"
-pip install -r "${project_root_dir_abs}/requirements.txt"
+pip install -I -r "${project_root_dir_abs}/requirements.txt"
 
 # Build complete!
 echo -e "\n\n${bold_green}${sparkles} ${venv_name} venv build complete & Ready for use!...${end}"
