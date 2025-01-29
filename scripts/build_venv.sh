@@ -82,32 +82,32 @@ declare -r project_root_dir_abs
 # Get venv name or set to default 'build_undefined'
 if [[ -z "$1" ]]; then
     venv_name="build_undefined"
-    echo -e "\n\n${bold_red}${warning_sign} No venv name supplied! Using: ${venv_name}${end}"
+    echo -e "\n\n${bold_red}${warning_sign} No venv name supplied! Using default: '${venv_name}'${end}"
 elif [[ -n "$1" ]]; then
     venv_name="$1"
-    echo -e "\n\n${bold_green}${green_check_mark} Building venv ${venv_name}${end}"
+    echo -e "\n\n${bold_green}${green_check_mark} Building '${venv_name}' venv...${end}"
 fi
 
 # Create Local venv
-echo -e "\n\n${bold_green}${sparkles} Creating ${venv_name} venv...${end}"
+echo -e "\n\n${bold_green}${sparkles} Creating '${venv_name}' venv...${end}"
 python_version_for_venv="3.12"
 python${python_version_for_venv} -m venv --clear --copies "${project_root_dir_abs}/${venv_name}"
 
 # Activate local venv
 source "${project_root_dir_abs}/${venv_name}/bin/activate"
-echo -e "\n\n${bold_green}${green_check_mark} venv ${venv_name} activated:${end}"
+echo -e "\n\n${bold_green}${green_check_mark} '${venv_name}' venv activated:${end}"
 echo -e "OS Version: $(uname)"
 echo -e "Kernel Version: $(uname -r)"
 echo -e "venv: $VIRTUAL_ENV"
 echo -e "running: $(python --version)"
 
 # Install requirements
-echo -e "\n\n${bold_green}${sparkles} Installing requirements...${end}"
+echo -e "\n\n${bold_green}${sparkles} Installing requirements into '${venv_name}' venv...${end}"
 pip install --upgrade pip
 pip install -I -r "${project_root_dir_abs}/requirements.txt"
 
 # Build complete!
-echo -e "\n\n${bold_green}${sparkles} ${venv_name} venv build complete & Ready for use!...${end}"
+echo -e "\n\n${bold_green}${sparkles} '${venv_name}' venv build complete & Ready for use!${end}"
 
 echo -e "\n\n${bold_yellow}${warning_sign} Virtual environment deactivated!${end}"
 deactivate
