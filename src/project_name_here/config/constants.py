@@ -9,8 +9,8 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# __init__.py -> config
-# Created 7/19/23 - 10:24 AM UK Time (London) by carlogtt
+# ProjectNameHere/src/project_name_here/config/constants.py
+# Created 2/17/25 - 8:14 PM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
 
@@ -24,16 +24,14 @@ This module ...
 # These exceptions may be necessary due to specific coding requirements
 # or to bypass false positives.
 # ======================================================================
-# flake8: noqa
+#
 
 # ======================================================================
 # IMPORTS
 # Importing required libraries and modules for the application.
 # ======================================================================
 
-# Local Folder (Relative) Imports
-from .aaa_env_vars import *
-from .constants import *
+import os
 
 # END IMPORTS
 # ======================================================================
@@ -47,3 +45,5 @@ from .constants import *
 
 # Type aliases
 #
+
+PROJECT_ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
