@@ -32,13 +32,14 @@ This module ...
 # ======================================================================
 
 import os
+import pathlib
 
 # END IMPORTS
 # ======================================================================
 
 
 # List of public names in the module
-# __all__ = []
+__all__ = ['Constants']
 
 # Setting up logger for current module
 # module_logger =
@@ -46,4 +47,14 @@ import os
 # Type aliases
 #
 
-PROJECT_ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+
+class Constants:
+    """
+    This class holds constants for the project.
+    It provides a centralized location for storing and accessing various
+    configuration values used throughout the application.
+    """
+
+    PROJECT_ROOT_DIR = pathlib.Path(
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+    )
