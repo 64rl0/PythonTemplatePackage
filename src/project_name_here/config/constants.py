@@ -55,6 +55,7 @@ class Constants:
     configuration values used throughout the application.
     """
 
+    HOME_DIR = pathlib.Path.home()
     PROJECT_ROOT_DIR = pathlib.Path(
         os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
     )
