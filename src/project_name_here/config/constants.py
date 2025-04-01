@@ -31,6 +31,7 @@ This module ...
 # Importing required libraries and modules for the application.
 # ======================================================================
 
+# Standard Library Imports
 import os
 import pathlib
 
@@ -59,3 +60,7 @@ class Constants:
     PROJECT_ROOT_DIR = pathlib.Path(
         os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
     )
+
+    # Logging
+    APP_NAME = 'ProjectNameHere'  # if this line changes, update icarus
+    LOGGING_LEVEL = 'DEBUG'
