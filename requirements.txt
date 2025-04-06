@@ -9,3 +9,4 @@ black
 isort
 mypy
 flake8
+pep8-naming
