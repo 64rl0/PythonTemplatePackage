@@ -141,6 +141,10 @@ if [[ "${isort}" == "Y" ]]; then
         echo -e "${blue}\ntest/${end}"
         isort "${project_root_dir_abs}/test" 2>&1
     fi
+    if [[ -d "${project_root_dir_abs}/doc" ]]; then
+        echo -e "${blue}doc/${end}"
+        isort "${project_root_dir_abs}/doc" 2>&1
+    fi
 else
     echo -e "${bold_red}[DISABLED]${end}"
 fi
@@ -155,6 +159,10 @@ if [[ "${black_fmt}" == "Y" ]]; then
     if [[ -d "${project_root_dir_abs}/test" ]]; then
         echo -e "${blue}\ntest/${end}"
         black "${project_root_dir_abs}/test" 2>&1
+    fi
+    if [[ -d "${project_root_dir_abs}/doc" ]]; then
+        echo -e "${blue}doc/${end}"
+        black "${project_root_dir_abs}/doc" 2>&1
     fi
 else
     echo -e "${bold_red}[DISABLED]${end}"
