@@ -142,7 +142,7 @@ if [[ "${isort}" == "Y" ]]; then
         isort "${project_root_dir_abs}/test" 2>&1
     fi
     if [[ -d "${project_root_dir_abs}/doc" ]]; then
-        echo -e "${blue}doc/${end}"
+        echo -e "${blue}\ndoc/${end}"
         isort "${project_root_dir_abs}/doc" 2>&1
     fi
 else
@@ -161,7 +161,7 @@ if [[ "${black_fmt}" == "Y" ]]; then
         black "${project_root_dir_abs}/test" 2>&1
     fi
     if [[ -d "${project_root_dir_abs}/doc" ]]; then
-        echo -e "${blue}doc/${end}"
+        echo -e "${blue}\ndoc/${end}"
         black "${project_root_dir_abs}/doc" 2>&1
     fi
 else
@@ -251,6 +251,11 @@ if [[ "${nnbsp}" == "Y" ]]; then
     if [[ -d "${project_root_dir_abs}/lib" ]]; then
         echo -e "${blue}\nlib/${end}"
         find "${project_root_dir_abs}/lib" -type f -exec sed -i '' 's/ / /g' {} +
+        echo -e "done!"
+    fi
+    if [[ -d "${project_root_dir_abs}/doc" ]]; then
+        echo -e "${blue}\ndoc/${end}"
+        find "${project_root_dir_abs}/doc" -type f -exec sed -i '' 's/ / /g' {} +
         echo -e "done!"
     fi
 else
