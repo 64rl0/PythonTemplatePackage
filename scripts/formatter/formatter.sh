@@ -85,9 +85,9 @@ project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
 declare -r project_root_dir_abs
 formatter_ignore=($(cat "${script_dir_abs}/formatter/.formatterignore"))
 declare -r formatter_ignore
-all_files_l1=($(find "${project_root_dir_abs}" -type f -mindepth 1 -maxdepth 1))
+all_files_l1=($(find "${project_root_dir_abs}" -mindepth 1 -maxdepth 1 -type f))
 declare -r all_files_l1
-all_dirs_l1=($(find "${project_root_dir_abs}" -type d -mindepth 1 -maxdepth 1))
+all_dirs_l1=($(find "${project_root_dir_abs}" -mindepth 1 -maxdepth 1 -type d))
 declare -r all_dirs_l1
 
 # Select the correct venv with the tools installed
@@ -225,7 +225,13 @@ function run_char_replacement() {
     for el in "${final_list[@]}"; do
         if [[ "${nnbsp}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
-            find "${el}" -type f -not -name "${this_file_name}" -exec sed -i '' 's/ / /g' {} + || :
+            if [[ $(uname -s) == "Darwin" ]]; then
+                # macOS
+                find "${el}" -type f -not -name "${this_file_name}" -exec sed -i '' 's/ / /g' {} + || :
+            else
+                # Linux
+                find "${el}" -type f -not -name "${this_file_name}" -exec sed -i 's/ / /g' {} + || :
+            fi
             echo -e "done!"
             echo
         else
