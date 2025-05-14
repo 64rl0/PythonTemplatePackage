@@ -156,8 +156,10 @@ function deactivate_venv() {
 }
 
 function run_isort() {
+    elements=("${active_dirs[@]}" "${active_py_files[@]}")
+
     echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running iSort... ${end}"
-    for el in "${final_list[@]}"; do
+    for el in "${elements[@]}"; do
         if [[ "${isort}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
             isort "${el}" || :
@@ -169,8 +171,10 @@ function run_isort() {
 }
 
 function run_black() {
+    elements=("${active_dirs[@]}" "${active_py_files[@]}")
+
     echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running Black... ${end}"
-    for el in "${final_list[@]}"; do
+    for el in "${elements[@]}"; do
         if [[ "${black_fmt}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
             black "${el}" || :
@@ -182,8 +186,10 @@ function run_black() {
 }
 
 function run_flake8() {
+    elements=("${active_dirs[@]}" "${active_py_files[@]}")
+
     echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running Flake8... ${end}"
-    for el in "${final_list[@]}"; do
+    for el in "${elements[@]}"; do
         if [[ "${flake8}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
             flake8 -v "${el}" || :
@@ -195,8 +201,10 @@ function run_flake8() {
 }
 
 function run_mypy() {
+    elements=("${active_dirs[@]}" "${active_py_files[@]}")
+
     echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running mypy... ${end}"
-    for el in "${final_list[@]}"; do
+    for el in "${elements[@]}"; do
         if [[ "${mypy}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
             mypy "${el}" || :
@@ -208,8 +216,10 @@ function run_mypy() {
 }
 
 function run_shfmt() {
+    elements=("${active_dirs[@]}" "${active_sh_files[@]}")
+
     echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running shfmt (bash formatter)... ${end}"
-    for el in "${final_list[@]}"; do
+    for el in "${elements[@]}"; do
         if [[ "${shfmt}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
             shfmt -l -w "${el}" || :
@@ -221,8 +231,10 @@ function run_shfmt() {
 }
 
 function run_char_replacement() {
+    elements=("${active_dirs[@]}" "${active_py_files[@]}" "${active_sh_files[@]}" "${active_other_files[@]}")
+
     echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running 'NNBSP' char replacement... ${end}"
-    for el in "${final_list[@]}"; do
+    for el in "${elements[@]}"; do
         if [[ "${nnbsp}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
             if [[ $(uname -s) == "Darwin" ]]; then
@@ -257,10 +269,14 @@ function build_active_dirs() {
             active_dirs+=("${dir}")
         fi
     done
+
+    declare -r active_dirs
 }
 
 function build_active_files() {
-    active_files=()
+    active_py_files=()
+    active_sh_files=()
+    active_other_files=()
 
     for file in "${all_files_l1[@]}"; do
         unset ignore_file
@@ -273,34 +289,26 @@ function build_active_files() {
         done
 
         if [[ "${ignore_file}" != true ]]; then
-            active_files+=("${file}")
-        fi
-    done
-}
-
-function build_active_list() {
-    build_active_dirs
-    build_active_files
-
-    final_list=()
-
-    for dir in "${active_dirs[@]}"; do
-        final_list+=("${dir}")
-    done
-
-    for file in "${active_files[@]}"; do
-        if [[ "${file}" =~ .+\.py$ ]]; then
-            final_list+=("${file}")
+            if [[ "${file}" =~ .+\.py$ ]]; then
+                active_py_files+=("${file}")
+            elif [[ "${file}" =~ .+\.sh$ ]]; then
+                active_sh_files+=("${file}")
+            else
+                active_other_files+=("${file}")
+            fi
         fi
     done
 
-    declare -r final_list
+    declare -r active_py_files
+    declare -r active_sh_files
+    declare -r active_other_files
 }
 
 function main() {
     activate_venv
 
-    build_active_list
+    build_active_dirs
+    build_active_files
 
     run_isort
     run_black
