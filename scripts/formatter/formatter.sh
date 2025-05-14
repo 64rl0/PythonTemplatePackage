@@ -4,13 +4,13 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# scripts/formatter.sh
+# scripts/formatter/formatter.sh
 # Created 3/3/24 - 11:41 AM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
 
 # Command used in the external tool is:
-# --login -c "./scripts/formatter.sh"
+# --login -c "./scripts/formatter/formatter.sh"
 
 # Basic Foreground Colors
 declare -r black=$'\033[30m'
