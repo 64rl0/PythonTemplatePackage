@@ -4,8 +4,8 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# ProjectNameHere/scripts/deploy.sh
-# Created 1/29/25 - 4:55 PM UK Time (London) by carlogtt
+# ProjectNameHere/scripts/release.sh
+# Created 5/14/25 - 9:25 PM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
 
@@ -54,6 +54,7 @@ declare -r end_dim=$'\033[22m'
 declare -r end_italic_underline=$'\033[23m'
 declare -r end_invert=$'\033[27m'
 declare -r end_hidden=$'\033[28m'
+declare -r clear_line=$'\033[2K'
 
 # Emoji
 declare -r green_check_mark="\xE2\x9C\x85"
@@ -79,4 +80,5 @@ declare -r script_dir_abs
 project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
 declare -r project_root_dir_abs
 
-make release
+make format
+make test

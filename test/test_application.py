@@ -34,6 +34,9 @@ This module ...
 # Standard Library Imports
 import textwrap
 
+# Third Party Library Imports
+import pytest
+
 # END IMPORTS
 # ======================================================================
 
@@ -48,6 +51,7 @@ import textwrap
 #
 
 
+@pytest.mark.xfail
 def test_that_you_wrote_tests():
     assertion_string = textwrap.dedent("""\
     No, you have not written tests.
@@ -56,4 +60,4 @@ def test_that_you_wrote_tests():
     due to no tests or missing coverage. So, write a real test and
     then remove this!
     """)
-    assert True, assertion_string
+    assert False, assertion_string
