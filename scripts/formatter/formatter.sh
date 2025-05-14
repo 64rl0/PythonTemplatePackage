@@ -100,6 +100,11 @@ mypy="Y"
 shfmt="Y"
 nnbsp="Y"
 
+function echo_title() {
+    title="${1}"
+    echo -e "\n${sparkles} ${bg_cyan}${bold_black} ${title} ${end}"
+}
+
 function activate_venv() {
     # Use brazil runtime farm
     if [[ -d "${project_root_dir_abs}/build/private" ]]; then
@@ -144,10 +149,10 @@ function activate_venv() {
     echo -e "OS Version: $(uname)"
     echo -e "Kernel Version: $(uname -r)"
     echo -e "running: $(python3 --version)"
+    echo
 }
 
 function deactivate_venv() {
-    echo -e "\n${bold_yellow}${warning_sign} Virtual environment deactivated!${end}"
     if [[ -n "${OLD_PATH}" ]]; then
         PATH="${OLD_PATH}"
     else
@@ -157,8 +162,6 @@ function deactivate_venv() {
 
 function run_isort() {
     elements=("${active_dirs[@]}" "${active_py_files[@]}")
-
-    echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running iSort... ${end}"
     for el in "${elements[@]}"; do
         if [[ "${isort}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
@@ -172,8 +175,6 @@ function run_isort() {
 
 function run_black() {
     elements=("${active_dirs[@]}" "${active_py_files[@]}")
-
-    echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running Black... ${end}"
     for el in "${elements[@]}"; do
         if [[ "${black_fmt}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
@@ -187,8 +188,6 @@ function run_black() {
 
 function run_flake8() {
     elements=("${active_dirs[@]}" "${active_py_files[@]}")
-
-    echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running Flake8... ${end}"
     for el in "${elements[@]}"; do
         if [[ "${flake8}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
@@ -202,8 +201,6 @@ function run_flake8() {
 
 function run_mypy() {
     elements=("${active_dirs[@]}" "${active_py_files[@]}")
-
-    echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running mypy... ${end}"
     for el in "${elements[@]}"; do
         if [[ "${mypy}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
@@ -217,8 +214,6 @@ function run_mypy() {
 
 function run_shfmt() {
     elements=("${active_dirs[@]}" "${active_sh_files[@]}")
-
-    echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running shfmt (bash formatter)... ${end}"
     for el in "${elements[@]}"; do
         if [[ "${shfmt}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
@@ -232,8 +227,6 @@ function run_shfmt() {
 
 function run_char_replacement() {
     elements=("${active_dirs[@]}" "${active_py_files[@]}" "${active_sh_files[@]}" "${active_other_files[@]}")
-
-    echo -e "\n${bg_cyan}${bold_black} ${sparkles} Running 'NNBSP' char replacement... ${end}"
     for el in "${elements[@]}"; do
         if [[ "${nnbsp}" == "Y" ]]; then
             echo -e "${blue}${el}${end}"
@@ -305,18 +298,31 @@ function build_active_files() {
 }
 
 function main() {
+    echo_title "Project info"
     activate_venv
 
     build_active_dirs
     build_active_files
 
+    echo_title "Running iSort..."
     run_isort
+
+    echo_title "Running Black..."
     run_black
+
+    echo_title "Running Flake8..."
     run_flake8
+
+    echo_title "Running mypy..."
     run_mypy
+
+    echo_title "Running shfmt (bash formatter)..."
     run_shfmt
+
+    echo_title "Running 'NNBSP' char replacement..."
     run_char_replacement
 
+    echo_title "Virtual environment deactivated!"
     deactivate_venv
 }
 
