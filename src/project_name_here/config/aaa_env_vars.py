@@ -39,7 +39,7 @@ import dotenv
 
 
 # List of public names in the module
-__all__ = []
+__all__: list[str] = []
 
 # Setting up logger for current module
 # module_logger =

@@ -40,7 +40,9 @@ import pathlib
 
 
 # List of public names in the module
-__all__ = ['Constants']
+__all__ = [
+    'Constants',
+]
 
 # Setting up logger for current module
 # module_logger =

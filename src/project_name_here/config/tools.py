@@ -32,7 +32,7 @@ This module ...
 # ======================================================================
 
 # My Library Imports
-import carlogtt_library as mylib
+import carlogtt_python_library as mylib
 
 # Local Folder (Relative) Imports
 from . import constants
@@ -42,7 +42,9 @@ from . import constants
 
 
 # List of public names in the module
-__all__ = ['tools']
+__all__ = [
+    'tools',
+]
 
 # Setting up logger for current module
 # module_logger =
