@@ -232,10 +232,10 @@ function run_char_replacement() {
             echo -e "${blue}${el}${end}"
             if [[ $(uname -s) == "Darwin" ]]; then
                 # macOS
-                find "${el}" -type f -not -name "${this_file_name}" -exec sed -i '' 's/ / /g' {} + || :
+                find "${el}" -type f -not -name "${this_file_name}" -not -name '*.pyc' -exec sed -i '' 's/ / /g' {} + || :
             else
                 # Linux
-                find "${el}" -type f -not -name "${this_file_name}" -exec sed -i 's/ / /g' {} + || :
+                find "${el}" -type f -not -name "${this_file_name}" -not -name '*.pyc' -exec sed -i 's/ / /g' {} + || :
             fi
             echo -e "done!"
             echo
