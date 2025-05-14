@@ -5,7 +5,7 @@
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
 # ProjectNameHere/scripts/deploy.sh
-# Created 1/29/25 - 4:55 PM UK Time (London) by carlogtt
+# Created 1/29/25 - 4:55 PM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
 
@@ -70,8 +70,8 @@ declare -r package="\xF0\x9F\x93\xA6"
 declare -r network_world="\xF0\x9F\x8C\x90"
 
 # Script Options
-set -o errexit   # Exit immediately if a command exits with a non-zero status
-set -o pipefail  # Exit status of a pipeline is the status of the last cmd to exit with non-zero
+set -o errexit  # Exit immediately if a command exits with a non-zero status
+set -o pipefail # Exit status of a pipeline is the status of the last cmd to exit with non-zero
 
 # Script Paths
 script_dir_abs="$(realpath -- "$(dirname -- "${BASH_SOURCE[0]}")")"
@@ -84,4 +84,3 @@ declare -r project_root_dir_abs
 # Format code
 make format
 echo -e "\n${green_check_mark} ${bold_green}Code formatted${end}\n"
-
