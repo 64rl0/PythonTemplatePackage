@@ -80,5 +80,4 @@ declare -r script_dir_abs
 project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
 declare -r project_root_dir_abs
 
-make format
-make test
+"${script_dir_abs}/formatter/formatter.sh" "--with-pytest"

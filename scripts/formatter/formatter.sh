@@ -88,13 +88,18 @@ all_dirs_l1=($(find "${project_root_dir_abs}" -mindepth 1 -maxdepth 1 -type d))
 declare -r all_dirs_l1
 
 # User defined variables
-formatters=("isort" "black" "flake8" "mypy" "shfmt" "whitespaces")
+formatters=("isort" "black" "flake8" "mypy" "shfmt" "whitespaces" "pytest")
 isort="Y"
 black_fmt="Y"
 flake8="Y"
 mypy="Y"
 shfmt="Y"
 whitespaces="Y"
+if [[ "${1}" == "--with-pytest" ]]; then
+    pytest="Y"
+else
+    pytest="N"
+fi
 
 function echo_title() {
     title="${1}"
@@ -114,8 +119,10 @@ function run_isort() {
             }
             echo
         else
-            echo -e "${bold_red}[DISABLED]${end}"
             isort_summary_status="${bold_black}${bg_magenta} SKIP ${end}"
+            echo -e "${bold_red}[DISABLED]${end}"
+            echo
+            break
         fi
     done
 }
@@ -133,8 +140,10 @@ function run_black() {
             }
             echo
         else
-            echo -e "${bold_red}[DISABLED]${end}"
             black_summary_status="${bold_black}${bg_magenta} SKIP ${end}"
+            echo -e "${bold_red}[DISABLED]${end}"
+            echo
+            break
         fi
     done
 }
@@ -152,8 +161,10 @@ function run_flake8() {
             }
             echo
         else
-            echo -e "${bold_red}[DISABLED]${end}"
             flake8_summary_status="${bold_black}${bg_magenta} SKIP ${end}"
+            echo -e "${bold_red}[DISABLED]${end}"
+            echo
+            break
         fi
     done
 }
@@ -173,8 +184,10 @@ function run_mypy() {
             }
             echo
         else
-            echo -e "${bold_red}[DISABLED]${end}"
             mypy_summary_status="${bold_black}${bg_magenta} SKIP ${end}"
+            echo -e "${bold_red}[DISABLED]${end}"
+            echo
+            break
         fi
     done
 }
@@ -192,8 +205,10 @@ function run_shfmt() {
             }
             echo
         else
-            echo -e "${bold_red}[DISABLED]${end}"
             shfmt_summary_status="${bold_black}${bg_magenta} SKIP ${end}"
+            echo -e "${bold_red}[DISABLED]${end}"
+            echo
+            break
         fi
     done
 }
@@ -221,10 +236,28 @@ function run_char_replacement() {
             echo -e "done!"
             echo
         else
-            echo -e "${bold_red}[DISABLED]${end}"
             whitespaces_summary_status="${bold_black}${bg_magenta} SKIP ${end}"
+            echo -e "${bold_red}[DISABLED]${end}"
+            echo
+            break
         fi
     done
+}
+
+function run_pytest() {
+    pytest_summary_status="${bold_black}${bg_green} PASS ${end}"
+
+    if [[ "${pytest}" == "Y" ]]; then
+        pytest 2>&1 || {
+            pytest_summary_status="${bold_black}${bg_red} FAIL ${end}"
+            exit_code=1
+        }
+        echo
+    else
+        pytest_summary_status="${bold_black}${bg_magenta} SKIP ${end}"
+        echo -e "${bold_red}[DISABLED]${end}"
+        echo
+    fi
 }
 
 function build_active_dirs() {
@@ -281,9 +314,11 @@ function build_active_files() {
 
 function echo_summary() {
     echo
+    echo -e "${runtime}"
+    echo
 
     printf "%-35s-+-%-7s\n" "-----------------------------------" "-------"
-    printf "%-35s | %-7s\n" "Tool" "Status"
+    printf "%-46s | %-7s\n" "${bold_white}Tool${end}" "${bold_white}Status${end}"
     printf "%-35s-+-%-7s\n" "-----------------------------------" "-------"
 
     for formatter in "${formatters[@]}"; do
@@ -323,6 +358,9 @@ function main() {
 
     echo_title "Running 'NNBSP' char replacement..."
     run_char_replacement
+
+    echo_title "Running pytest..."
+    run_pytest
 
     echo_title "Deactivating virtual environment..."
     . "${script_dir_abs}/_deactivate_venv.sh"

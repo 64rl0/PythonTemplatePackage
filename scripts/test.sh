@@ -100,8 +100,10 @@ tool="$(printf '%s' "pytest ..................................." | cut -c1-35)"
 status="${pytest_summary_status}"
 
 echo
+echo -e "${runtime}"
+echo
 printf "%-35s-+-%-7s\n" "-----------------------------------" "-------"
-printf "%-35s | %-7s\n" "Tool" "Status"
+printf "%-46s | %-7s\n" "${bold_white}Tool${end}" "${bold_white}Status${end}"
 printf "%-35s-+-%-7s\n" "-----------------------------------" "-------"
 printf "%-35s | %-7s\n" "${tool}" "${status}"
 printf "%-35s-+-%-7s\n" "-----------------------------------" "-------"
