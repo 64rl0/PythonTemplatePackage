@@ -4,8 +4,8 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# scripts/release.sh
-# Created 5/14/25 - 9:25 PM UK Time (London) by carlogtt
+# scripts/mypy.sh
+# Created 5/15/25 - 10:53 PM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
 
@@ -80,4 +80,4 @@ declare -r script_dir_abs
 project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
 declare -r project_root_dir_abs
 
-icarus builder forge --all
+icarus builder forge --with-mypy

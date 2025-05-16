@@ -1,10 +1,10 @@
-.PHONY: format
-format:
-	./scripts/formatter/formatter.sh
-
 .PHONY: build
 build:
-	./scripts/build_venv.sh "build_venv"
+	./scripts/build_venv.sh
+
+.PHONY: format
+format:
+	./scripts/formatter.sh
 
 .PHONY: release
 release:
@@ -13,6 +13,10 @@ release:
 .PHONY: test
 test:
 	./scripts/test.sh
+
+.PHONY: mypy
+mypy:
+	./scripts/mypy.sh
 
 .PHONY: deploy
 deploy:

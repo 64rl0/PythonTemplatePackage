@@ -4,7 +4,7 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# ProjectNameHere/scripts/deploy.sh
+# scripts/deploy.sh
 # Created 1/29/25 - 4:55 PM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
@@ -80,3 +80,5 @@ project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
 declare -r project_root_dir_abs
 
 make release
+
+# Add you deploy code here
