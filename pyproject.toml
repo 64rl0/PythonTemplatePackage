@@ -1,6 +1,6 @@
 [project]
 name = "ProjectNameHere"
-description = "Project description"
+description = "Add project description"
 readme = "README.md"
 version = "1.0.0"
 license = {text = "MIT"}
