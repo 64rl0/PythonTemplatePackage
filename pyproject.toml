@@ -1,5 +1,5 @@
 [project]
-name = "ProjectNameHere"
+name = "project-name-here"
 description = "Add project description"
 readme = "README.md"
 version = "1.0.0"
