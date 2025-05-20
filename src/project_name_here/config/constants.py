@@ -9,7 +9,7 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# ProjectNameHere/src/project_name_here/config/constants.py
+# src/project_name_here/config/constants.py
 # Created 2/17/25 - 8:14 PM UK Time (London) by carlogtt
 # Copyright (c) Amazon.com Inc. All Rights Reserved.
 # AMAZON.COM CONFIDENTIAL
@@ -64,5 +64,5 @@ class Constants:
     )
 
     # Logging
-    APP_NAME = 'ProjectNameHere'  # if this line changes, update icarus
+    APP_NAME = 'ProjectNameHere'
     LOGGING_LEVEL = 'DEBUG'
