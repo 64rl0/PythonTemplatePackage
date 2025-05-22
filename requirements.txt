@@ -7,6 +7,8 @@ python-dotenv
 # Test dependencies
 pytest
 
+# Type annotation depencencies
+
 # Documentation dependencies
 sphinx
 
