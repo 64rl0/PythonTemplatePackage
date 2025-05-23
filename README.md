@@ -1,3 +1,6 @@
 # ProjectNameHere
 
-Add project description.
+Add package description.
+
+## Package documentation
+[docs](file:///Users/carlogtt/Library/CloudStorage/Dropbox/SDE/Python/CarloCodes/_Projects/ProjectNameHere/docs/html/index.html)
