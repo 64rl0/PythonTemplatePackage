@@ -79,6 +79,6 @@ declare -r script_dir_abs
 project_root_dir_abs="$(realpath -- "${script_dir_abs}/..")"
 declare -r project_root_dir_abs
 
-icarus builder forge --release
+icarus builder release
 
 # Add you deploy code here
