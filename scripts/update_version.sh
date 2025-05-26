@@ -14,6 +14,10 @@
 
 # Read the current version and date from the file
 version_file="${project_root_dir_abs}/pyproject.toml"
+if  [[ ! -f "${version_file}" ]]; then
+    echo "Error: pyproject.toml file not found."
+    exit 1
+fi
 current_version=$(grep "^version = \"" "${version_file}" | cut -d ' ' -f 3 | sed 's/"//g')
 
 echo -e "Current version: ${current_version}"
@@ -60,6 +64,12 @@ new_version="version = \"${new_major}.${new_minor}.${new_patch}\""
 new_version_print="New version: ${new_major}.${new_minor}.${new_patch}"
 
 # Write the new version to the file
-sed -i '' "s|^version = \".*|${new_version}|" "${version_file}"
+if [[ $(uname -s) == "Darwin" ]]; then
+    # macOS
+    sed -i '' "s|^version = \".*|${new_version}|" "${version_file}"
+else
+    # Linux
+    sed -i "s|^version = \".*|${new_version}|" "${version_file}"
+fi
 
 echo -e "\n${bold_green}${package} ${new_version_print}${end}\n"
