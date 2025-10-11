@@ -15,20 +15,6 @@ dependencies = [
     # Runtime dependencies
     "python-dotenv",
 
-    # Test dependencies
-    "pytest",
-
-    # Type checking depencencies
-
-    # Documentation dependencies
-    "sphinx",
-
-    # Development dependencies
-    "black",
-    "isort",
-    "mypy",
-    "flake8",
-    "pep8-naming",
 ]
 
 
