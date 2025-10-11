@@ -8,7 +8,28 @@ authors = [
     {name = "Carlo Gatti", email = "carlo.gatti@me.com"}
 ]
 requires-python = ">= 3.9"
-dependencies = []
+dependencies = [
+    # My Library
+    "carlogtt-python-library",
+
+    # Runtime dependencies
+    "python-dotenv",
+
+    # Test dependencies
+    "pytest",
+
+    # Type checking depencencies
+
+    # Documentation dependencies
+    "sphinx",
+
+    # Development dependencies
+    "black",
+    "isort",
+    "mypy",
+    "flake8",
+    "pep8-naming",
+]
 
 
 [project.urls]
