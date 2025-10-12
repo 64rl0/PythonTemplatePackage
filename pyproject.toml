@@ -14,6 +14,8 @@ dependencies = [
 
     # Runtime dependencies
     "python-dotenv",
+
+    # Type checking depencencies
 ]
 
 
