@@ -25,6 +25,13 @@ Homepage = "https://github.com/64rl0"
 dev = []
 
 
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["**/*"]
+
+
 [tool.black]
 # black docs
 # https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html
