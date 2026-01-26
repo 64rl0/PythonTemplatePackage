@@ -22,7 +22,7 @@ dependencies = [
 Homepage = "https://github.com/64rl0"
 
 [project.optional-dependencies]
-dev = []
+development = []
 
 
 [build-system]
