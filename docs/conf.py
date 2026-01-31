@@ -83,7 +83,7 @@ def _keep_trailing_newline(app):
 
 def setup(app):
     """
-    Run as soon as the builder is initialised
+    Run as soon as the builder is initialized
     """
 
     app.connect("builder-inited", _keep_trailing_newline)
