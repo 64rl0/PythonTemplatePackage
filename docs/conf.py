@@ -47,7 +47,8 @@ project = 'ProjectNameHere'
 version = 'v.'
 release = 'r.'
 copyright = f"{datetime.datetime.now().year}, Carlo Gatti"
-author = "Carlo Gatti"
+author = 'Carlo Gatti'
+language = 'en'
 
 # General configuration
 extensions = [
