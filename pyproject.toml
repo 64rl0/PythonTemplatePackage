@@ -2,12 +2,12 @@
 name = "project-name-here"
 description = "Add project description"
 readme = "README.md"
-version = "1.0.0"
 license = "MIT"
 authors = [
     {name = "Carlo Gatti", email = "carlo.gatti@me.com"}
 ]
 requires-python = ">= 3.9"
+dynamic = ["version"]
 dependencies = [
     # My Library
     "carlogtt-python-library",
