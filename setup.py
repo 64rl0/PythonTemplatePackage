@@ -9,8 +9,8 @@
 #  (      _ \     /  |     (   | (_ |    |      |
 # \___| _/  _\ _|_\ ____| \___/ \___|   _|     _|
 
-# src/project_name_here/config/constants.py
-# Created 2/17/25 - 8:14 PM UK Time (London) by carlogtt
+# setup.py
+# Created 2/16/26 - 9:50 AM UK Time (London) by carlogtt
 
 """
 This module ...
@@ -33,34 +33,39 @@ This module ...
 import os
 import pathlib
 
+# Third Party Library Imports
+from setuptools import setup
+
 # END IMPORTS
 # ======================================================================
 
 
-# List of public names in the module
-__all__ = [
-    'Constants',
-]
-
-# Setting up logger for current module
-# module_logger =
-
-# Type aliases
-#
-
-
-class Constants:
+def derive_version() -> str:
     """
-    This class holds constants for the project.
-    It provides a centralized location for storing and accessing various
-    configuration values used throughout the application.
+    Derive the version number from the icarus.cfg file.
+
+    :return: The version number as a string.
     """
 
-    HOME_DIR = pathlib.Path.home()
-    PROJECT_ROOT_DIR = pathlib.Path(
-        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+    path_to_icarus_cfg = pathlib.Path(
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icarus.cfg')
     )
+    version = None
 
-    # Logging
-    APP_NAME = 'ProjectNameHere'
-    LOGGING_LEVEL = 'DEBUG'
+    with open(path_to_icarus_cfg, 'r') as fh:
+        for line in fh.readlines():
+            if line.startswith('  - version: '):
+                version = line.split(':')[1].strip()
+                if len(version.split('.')) != 3:
+                    continue
+                break
+
+    if version is None:
+        raise KeyError('Version not found in icarus.cfg file.')
+
+    return version
+
+
+setup(
+    version=derive_version(),
+)
