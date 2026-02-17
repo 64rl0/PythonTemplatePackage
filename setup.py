@@ -46,10 +46,10 @@ def derive_version() -> str:
     :return: The version number as a string.
     """
 
-    version = os.environ.get('PACKAGE_VERSION')
+    version = os.environ.get('ICARUS_PACKAGE_VERSION')
 
     if version is None:
-        raise KeyError("PACKAGE_VERSION not found in the environment.")
+        raise KeyError("ICARUS_PACKAGE_VERSION not found in the environment.")
 
     return version
 
