@@ -49,7 +49,7 @@ line-length = 100
 skip-string-normalization = 1
 
 # Enable potentially disruptive style changes that may be added to
-# Black’s main functionality in the next major release.
+# Black's main functionality in the next major release.
 preview = true
 unstable = true
 
