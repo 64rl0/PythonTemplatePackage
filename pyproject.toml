@@ -93,9 +93,9 @@ include_trailing_comma = true
 split_on_trailing_comma = true
 
 # Causes all non-indented imports to float to the top of the file
-#having its imports sorted (immediately below the top of file comment).
+# having its imports sorted (immediately below the top of file comment).
 # This can be an excellent shortcut for collecting imports every once
-#in a while when you place them in the middle of a file to avoid context
+# in a while when you place them in the middle of a file to avoid context
 # switching.
 float_to_top = true
 
@@ -104,13 +104,13 @@ float_to_top = true
 indented_import_headings = false
 
 # Force all imports to be sorted alphabetically within a section.
-#force_alphabetical_sort_within_sections = true
+# force_alphabetical_sort_within_sections = true
 
 # If enabled, isort will strip comments that exist within import lines.
-#ignore_comments = true
+# ignore_comments = true
 
 # Add an explicitly defined source path (modules within src paths have
-#their imports automatically categorized as first_party). Glob expansion
+# their imports automatically categorized as first_party). Glob expansion
 # (* and **) is supported for this option.
 src_paths = ['src/*']
 
@@ -136,7 +136,7 @@ known_mylib = ['carlogtt_library', 'carlogtt_python_library']
 known_first_party = []
 
 # Force isort to recognize a module as being a local folder. Generally,
-#this is reserved for relative imports (from . import module).
+# this is reserved for relative imports (from . import module).
 known_local_folder = []
 
 
