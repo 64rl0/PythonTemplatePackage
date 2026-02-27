@@ -15,6 +15,9 @@ pytest
 sphinx
 sphinx-rtd-theme
 
+# PyPi dependencies
+twine
+
 # Formatting dependencies
 black
 isort
