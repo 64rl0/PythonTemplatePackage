@@ -25,7 +25,8 @@ Homepage = "https://github.com/64rl0"
 # development = []
 
 [project.scripts]
-#foo = "project_name_here.main:main"
+# foo = "project_name_here.main:main"
+# bar = "project_name_here.cli:main"
 
 
 [build-system]
