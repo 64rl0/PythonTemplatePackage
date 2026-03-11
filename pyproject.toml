@@ -24,6 +24,9 @@ Homepage = "https://github.com/64rl0"
 [project.optional-dependencies]
 # development = []
 
+[project.scripts]
+#foo = "project_name_here.main:main"
+
 
 [build-system]
 requires = ["setuptools"]
