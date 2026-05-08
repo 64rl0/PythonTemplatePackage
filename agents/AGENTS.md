@@ -49,6 +49,21 @@ conventions.
 
 ---
 
+## Reasoning Style
+
+**Bias toward thoroughness over speed.**
+
+- Spending more tokens on deeper investigation is preferred. Do not
+  shortcut reasoning to save context.
+- Read surrounding code and related modules before proposing changes when
+  any ambiguity exists.
+- Consider alternatives and surface trade-offs on non-trivial decisions
+  rather than jumping to an answer.
+- When a trade-off arises between speed and correctness, default to
+  correctness.
+
+---
+
 ## Before Making Changes
 
 1. Understand the request fully before acting.
