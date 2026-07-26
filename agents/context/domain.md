@@ -39,4 +39,3 @@ invariants — it is not a product spec.
 <!-- Third-party services, APIs, or teams this project depends on. -->
 
 - **<Service>** — purpose: <...>. Contract: <...>. Owner: <...>.
-

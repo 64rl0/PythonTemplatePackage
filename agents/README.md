@@ -68,4 +68,3 @@ When starting a new project from this template:
 4. Clear out old `memory/*.md` and `notes/*.md` files (keep `.gitkeep`).
 5. `AGENTS.md` itself should rarely need per-project edits — it encodes
    principles, not project details.
-

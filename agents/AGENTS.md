@@ -300,4 +300,3 @@ For domain terminology and business rules, load `@agents/context/domain.md`.
 - Don't disable SSL/TLS verification, CORS protections, or auth checks — even
   temporarily.
 - Flag any changes to auth, permissions, or encryption for human review.
-

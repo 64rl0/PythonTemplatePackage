@@ -52,4 +52,3 @@ the actual stack. The defaults below match the author's standard template —
 - Type check: `<command>`
 - Test: `<command>`
 - Build: `<command>`
-
