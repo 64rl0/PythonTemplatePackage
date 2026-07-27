@@ -34,21 +34,15 @@ the actual stack. The defaults below match the author's standard template —
 - Prefer the standard library / framework-native features over third-party
   packages when the gap is small.
 - Pin versions in lockfiles; do not rely on floating ranges in production.
+- Declare dependencies in the file the build system expects — see
+  `@agents/context/build-system.md`. Never install a package by hand.
 
-## Tooling
+## Tooling and commands
 
-<!-- Replace with actual project tools -->
-- Formatter: <e.g. black, prettier>
-- Linter: <e.g. ruff, eslint>
-- Type checker: <e.g. mypy --strict, tsc --noEmit>
-- Test runner: <e.g. pytest, vitest>
-- Build: <e.g. make build, npm run build>
+Build, format, lint, type-check, and test commands are **not** listed here.
+This project uses a proprietary build system (Icarus Builder) rather than
+standard Python tooling, and it owns the interpreter, the dependencies, and
+the tool configuration.
 
-## Commands
-
-<!-- Commands the agent should know to verify work -->
-- Install: `<command>`
-- Lint: `<command>`
-- Type check: `<command>`
-- Test: `<command>`
-- Build: `<command>`
+Load `@agents/context/build-system.md` for every build, test, or
+verification command.

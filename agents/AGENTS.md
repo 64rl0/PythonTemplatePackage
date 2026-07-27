@@ -21,6 +21,11 @@ tool to load it **on a need-to-know basis** for the current task.
 
 Available references:
 
+- `@agents/context/build-system.md` — how to build, format, lint, test, and
+  run anything in this project. **This project uses a proprietary build
+  system (Icarus Builder), not standard Python tooling — no venv, no bare
+  `pip`/`pytest`.** Load before running any build, test, or verification
+  command, or when adding dependencies.
 - `@agents/context/tech-stack.md` — allowed languages, frameworks, tooling.
   Load when making code changes, adding dependencies, or scaffolding.
 - `@agents/context/architecture.md` — system architecture, module boundaries,
@@ -82,6 +87,10 @@ conventions.
 
 For language-specific and stack-specific rules, load
 `@agents/context/tech-stack.md`.
+
+For the commands that build, format, lint, type-check, and test this
+project, load `@agents/context/build-system.md`. Do not fall back on
+standard Python tooling — this project does not use it.
 
 ---
 
