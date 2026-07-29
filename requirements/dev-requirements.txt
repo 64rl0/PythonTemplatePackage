@@ -24,6 +24,7 @@ isort
 
 # Type checking dependencies
 mypy
+types-setuptools
 
 # build-time linting dependencies
 flake8
