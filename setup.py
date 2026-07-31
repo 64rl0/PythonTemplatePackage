@@ -13,7 +13,7 @@
 # Created 2/16/26 - 9:50 AM UK Time (London) by carlogtt
 
 """
-This module ...
+Setup module for the project, contains shim for Icarus Builder.
 """
 
 # ======================================================================
