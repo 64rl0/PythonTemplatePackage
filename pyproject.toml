@@ -14,8 +14,6 @@ dependencies = [
 
     # Runtime dependencies
     "python-dotenv",
-
-    # Type checking dependencies
 ]
 
 [project.urls]
