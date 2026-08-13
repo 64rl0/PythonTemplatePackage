@@ -150,6 +150,28 @@ they run the whole configured matrix and produce the pass/fail summary.
 
 ---
 
+## Paths
+
+`icarus builder path <name>` prints a path or value the build system owns,
+so scripts can ask for one instead of hardcoding it:
+
+```bash
+icarus builder path workspace.root    # project root
+icarus builder path pkg.version       # version from icarus.cfg
+icarus builder path --list            # every available name
+```
+
+Asking for a `*.runtimefarm` name does double duty: it **creates** that
+environment if it does not already exist, then prints where it is. So
+`icarus builder path devrun.runtimefarm` is how you materialize an
+environment on demand and get its location back.
+
+Farms that contain this package (`pkg`, `run`, `devrun`) need the artifacts
+first, so run `build` before asking for one — otherwise it fails with
+`No matching distribution found`.
+
+---
+
 ## Dependencies
 
 Declare dependencies in the right file and let the build system install
@@ -299,9 +321,8 @@ This is why activating a virtualenv or calling a bare `pytest` does not
 work: the environment is not a directory you enter, it is a set of
 variables the builder computes per farm per interpreter version.
 
-Scripts that need one of these locations should ask for it rather than
-hardcoding a path — `icarus builder path workspace.root`,
-`icarus builder path pkg.version`, and so on.
+Use `icarus builder path` (above) to get any of these locations rather than
+hardcoding them.
 
 ### Shebangs: making a script run against the active environment
 
