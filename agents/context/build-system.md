@@ -42,7 +42,7 @@ up the tree looking for `icarus.cfg` to find the project root.
 
 | Command | What it does |
 |---|---|
-| `icarus builder build` | Creates/re-creates the runtime environment: installs the interpreter, resolves and installs dependencies, builds and installs the package artifacts. |
+| `icarus builder build` | Builds the package artifacts (`sdist` + `wheel`) from `src/`. |
 | `icarus builder format` | Rewrites files in place with the formatters. |
 | `icarus builder test` | Runs the test suite (pytest) **against the last built package, not `src/`** — see below. |
 | `icarus builder release` | The full pipeline: build + format + lint + type-check + secret scan + tests + docs. |
@@ -52,11 +52,11 @@ up the tree looking for `icarus.cfg` to find the project root.
 **`icarus builder test` does not see your `src/` edits until you rebuild.**
 
 Tests import the package by name (`import project_name_here`), and that
-name resolves to the *built and installed* copy inside the runtimefarm —
-not to the working tree. Editing a file under `src/` changes nothing about
-what the tests import, so a stale build means you are testing the previous
-version of the code. The tests will happily pass or fail for the wrong
-reason, which is worse than an error.
+name resolves to an installed copy of the artifacts `build` produced — not
+to the working tree. `test` installs those artifacts as it sets up its
+environment, so if you edited `src/` without rebuilding, it installs and
+tests the *previous* version of your code. The tests will happily pass or
+fail for the wrong reason, which is worse than an error.
 
 So after any change under `src/`:
 
@@ -80,10 +80,12 @@ before you assume a bug.
 
 ### What each one actually runs
 
-`build` — resolves the build-tool dependency graph, downloads and unpacks
-the CPython runtime if not cached, builds the symlink farms, builds the
-package (`sdist` + `wheel`), checks package health with `twine check`, and
-installs the result into the package farm.
+`build` — prepares the build tooling it needs, then produces the package
+artifacts (`sdist` + `wheel`) and checks their health with `twine check`.
+**It does not install anything** — not dependencies, not the package
+itself. Environments are created on demand by whichever command needs one,
+so `build` on its own leaves you with fresh artifacts and nothing to import
+them from.
 
 `format` — `isort`, `black`, `shfmt`, plus the whitespace hygiene passes:
 line-ending normalization to LF, non-breaking-space replacement, trailing
@@ -107,7 +109,7 @@ Two more you will occasionally need:
 - `icarus builder clean` — removes the whole build root plus
   `*.egg-info`, `__pycache__`, `.mypy_cache`, `.pytest_cache`, and
   `.DS_Store`. Reach for this only when the environment is genuinely
-  broken; the next build has to redo all the dependency installation.
+  broken; everything then has to be reinstalled from scratch.
 
 ---
 
@@ -150,8 +152,8 @@ they run the whole configured matrix and produce the pass/fail summary.
 
 ## Dependencies
 
-Declare dependencies in the right file, then run `icarus builder build`
-to reconcile the environment. Never install a package by hand.
+Declare dependencies in the right file and let the build system install
+them. Never install a package by hand.
 
 | Kind | Where it goes |
 |---|---|
@@ -162,11 +164,11 @@ to reconcile the environment. Never install a package by hand.
 `requirements/run-requirements.txt` still exists and is still read, but
 it is legacy — new runtime dependencies belong in `pyproject.toml`.
 
-The builder caches a resolved dependency graph per farm and compares it
-on each run. When a requirements file changes it reports "Requirements
-changed" and reinstalls; when nothing changed it reports "Sync complete".
-That means `build` is cheap to re-run and is the correct response to a
-dependency edit.
+After editing a requirements file you do not need a separate install step.
+The next command that needs the environment reconciles it: it reports
+"Requirements changed" and reinstalls, or "Sync complete" when nothing
+moved. So just run whatever you were going to run — `test`, `release`, or
+an `exec-*`.
 
 Per `AGENTS.md`, adding a dependency needs discussion first — this
 section is about *how*, not *whether*.
@@ -281,12 +283,17 @@ two subsections that follow — writing shebangs and installing a binary
 into user space — are practical, so read on if either applies.
 
 Icarus downloads a prebuilt CPython tarball, unpacks it under
-`build/<platform>/runtime/CPython/<version>/`, and then constructs
+`build/<platform>/runtime/CPython/<version>/`, and constructs
 **runtimefarms** under `build/<platform>/env/path/` — trees of symlinks
 that compose an interpreter with exactly one dependency set. There is a
 farm per dependency graph (`tool`, `run`, `devrun`, `pkg`, and
 `*_excluderoot` variants). Running a command "in" a farm means the
 builder points `PATH`, `PYTHONHOME`, `PYTHONPATH`, and `PYTHONBIN` at it.
+
+Farms are created lazily: each command builds only the ones it needs, then
+reuses them. This is why the first `test` or `exec-*` after a `clean` is
+slow and later ones are fast, and why `build` alone populates far less than
+you might expect.
 
 This is why activating a virtualenv or calling a bare `pytest` does not
 work: the environment is not a directory you enter, it is a set of
