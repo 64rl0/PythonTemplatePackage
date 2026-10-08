@@ -83,6 +83,9 @@ conventions.
 - Follow the project's existing conventions over personal preferences.
 - Keep functions focused and single-purpose.
 - Add comments only when the "why" isn't obvious from the code.
+- Docstrings on public APIs only (modules, classes, public functions) — a
+  one-line summary unless the behavior is genuinely complex. No
+  `Args:`/`Returns:` boilerplate on trivial helpers.
 - Don't remove or modify tests unless explicitly asked.
 
 For language-specific and stack-specific rules, load
@@ -287,6 +290,48 @@ Append to `agents/memory/YYYY-MM-DD.md` in two cases:
 - Private info the user hasn't asked you to persist.
 
 If unsure whether something belongs in memory, ask before writing.
+
+---
+
+## Comments
+
+Agent-written code tends to over-comment. Default to few comments: code
+explains itself through naming and structure; comments are reserved for
+what code cannot say. Code tells you HOW, comments tell you WHY.
+
+### Never write comments that
+
+- Restate what the code does (`i += 1  # increment i`).
+- Narrate the implementation process ("First we fetch...", "Now handle
+  the error case...").
+- Address the reviewer or describe the change ("Changed this to...",
+  "This fixes the bug by...") — that belongs in the commit message, not
+  in the code.
+- Label obvious sections (`# imports`, `# main loop`, `} // end if`).
+- Explain language idioms any competent developer already knows.
+- A better variable or function name would make redundant. If code needs
+  a comment to be understandable, rewrite the code first — "don't comment
+  bad code, rewrite it."
+
+### Do write a comment when
+
+- The "why" is invisible from the code: business rule, constraint,
+  trade-off, workaround.
+- Code looks wrong or redundant but isn't — warn off future
+  "simplification".
+- Code was adapted from an external source — link it (answer, RFC, docs).
+- Fixing a non-obvious bug — note the cause at the fix site, with an
+  issue ref if available.
+- An assumption or precondition isn't enforced by the code itself.
+- The implementation is incomplete — add a TODO per the TODO rules above.
+
+### Maintenance
+
+- A wrong comment is worse than no comment. When you touch code, update
+  or delete the comments that describe it.
+- Keep comments short — one line is usually enough.
+- Match the existing comment density of the file you're editing; when in
+  doubt, sparse.
 
 ---
 
